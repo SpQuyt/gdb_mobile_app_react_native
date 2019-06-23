@@ -1,3 +1,4 @@
 export default class stateStorage {
-  static stepIndex = 0;
+  static enabledColor = 'brown';
+  static disabledColor = 'grey';
 }

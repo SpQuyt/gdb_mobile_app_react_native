@@ -1,2 +1,12 @@
 export const INCREASE = 'increase';
 export const DECREASE = 'decrease';
+export const ENABLE1 = 'enable1';
+export const DISABLE1 = 'disable1';
+export const ENABLE2 = 'enable2';
+export const DISABLE2 = 'disable2';
+export const ENABLE3 = 'enable3';
+export const DISABLE3 = 'disable3';
+export const ENABLE4 = 'enable4';
+export const DISABLE4 = 'disable4';
+export const ENABLE5 = 'enable5';
+export const DISABLE5 = 'disable5';
