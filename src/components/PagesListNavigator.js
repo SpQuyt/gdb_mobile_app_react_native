@@ -5,6 +5,8 @@ import Page3 from './Page3';
 import Page4 from './Page4';
 import Page5 from './Page5';
 import ViewPager from './ViewPager';
+import PropTypes from 'prop-types';
+import { View, TouchableOpacity, Text } from 'react-native';
 
 //import redux
 import * as actions from '../actions/index';
@@ -43,21 +45,40 @@ class PagesListNavigator extends Component {
   render() {
     return (
       <ViewPager
+        ref={(viewPager) => { 
+          global.viewPager = viewPager;
+        }}
+        initialPage={this.props.currentIndex - 1}
         onChangePage={(page) => {
           this.changeColor(page + 1);
         }}
       >
+        {/* <View>
+          <TouchableOpacity onPress={async () => {
+            await this.props.to3step();
+            console.log(this.props.currentIndex)
+            this.viewPager.goToPage(this.props.currentIndex)
+          }}>
+            <Text>GO</Text>
+          </TouchableOpacity>
+        </View> */}
         <Page1 />
         <Page2 />
         <Page3 />
         <Page4 />
         <Page5 />
+
       </ViewPager>
     )
   }
 }
 
+PagesListNavigator.propTypes = {
+  currentPage: PropTypes.number,
+}
+
 const mapStateToProps = state => ({
+  currentIndex: state.currentIndex,
   step1color: state.step1color,
   step2color: state.step2color,
   step3color: state.step3color,

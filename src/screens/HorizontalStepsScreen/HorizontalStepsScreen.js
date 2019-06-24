@@ -8,7 +8,6 @@ import Timeline from '../../components/Timeline';
 //import redux
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
-import PagesList from '../../components/PagesList';
 import PagesListNavigator from '../../components/PagesListNavigator';
 
 class HorizontalStepsScreen extends Component {
@@ -24,8 +23,7 @@ class HorizontalStepsScreen extends Component {
     return (
       <View style={styles.container}>
         <Timeline indexLine={this.state.indexLine} indexStep={this.state.indexStep} />
-        {/* <PagesList /> */}
-        <PagesListNavigator />
+        <PagesListNavigator currentPage={this.props.currentIndex}/>
 
       </View>
 
@@ -33,4 +31,8 @@ class HorizontalStepsScreen extends Component {
   }
 }
 
-export default connect(null, actions)(HorizontalStepsScreen);
+const mapStateToProps = state => ({
+  currentIndex: state.currentIndex,
+})
+
+export default connect(mapStateToProps, actions)(HorizontalStepsScreen);

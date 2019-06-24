@@ -17,6 +17,7 @@ class Page3 extends Component {
 
   async onBack() {
     await this.props.tobackstep();
+    global.viewPager.goToPage(this.props.currentIndex - 2);
     this.props.enable2();
     this.props.disable3();
     this.props.disable4();
@@ -25,6 +26,7 @@ class Page3 extends Component {
 
   async onNext() {
     await this.props.tonextstep();
+    global.viewPager.goToPage(this.props.currentIndex);
     this.props.enable2();
     this.props.enable3();
     this.props.enable4();
@@ -91,4 +93,8 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, actions)(Page3);
+const mapStateToProps = state => ({
+  currentIndex: state.currentIndex,
+});
+
+export default connect(mapStateToProps, actions)(Page3);

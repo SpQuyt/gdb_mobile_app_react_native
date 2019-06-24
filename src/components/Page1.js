@@ -15,8 +15,9 @@ class Page1 extends Component {
     super(props);
   }
 
-  onNext() {
-    this.props.tonextstep();
+  async onNext() {
+    await this.props.tonextstep();
+    global.viewPager.goToPage(this.props.currentIndex);
     this.props.enable2();
     this.props.disable3();
     this.props.disable4();
@@ -32,7 +33,7 @@ class Page1 extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => {this.onNext()}}
+            onPress={async () => {this.onNext()}}
             style={styles.backButton}>
             <Text>Next</Text>
           </TouchableOpacity>
