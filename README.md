@@ -13,7 +13,11 @@
   ```
 ## Task 2 (15929): Implement a horizontal steps screen
 ### Overview:
-  
+  I have 2 ways of solving this problems:
+  * Using **react-native-steps-indicator** and **@react-native-comnity/viewpager**.
+  * Doing it myself.
+  I choose Option number 2 so that not only can I practice modulizing and structuring my code, but I also learn how to use **Redux** too.
+  But I will switch to Option number 1 when we are in the real project.
 ### Install:
   * Clone this repo.
   * In **`index.js `**, change the `initialRouteName` value (line 23) to **HorizontalStepsScreen**.
