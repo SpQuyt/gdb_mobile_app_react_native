@@ -47,7 +47,6 @@ export default class LoginScreen extends Component {
   onLoginFB = async () => {
     try {
       let result = await LoginManager.logInWithPermissions(['public_profile']);
-      console.log(result);
       if (result.isCancelled) {
         alert(`Login was cancelled!`);
       } else {
@@ -55,6 +54,8 @@ export default class LoginScreen extends Component {
       }
     } catch (err) {
       alert(`Login failed with error: ${err}`);
+    } finally {
+      console.log(result)
     }
   }
 
@@ -63,6 +64,8 @@ export default class LoginScreen extends Component {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       this.setState({ userInfo });
+      console.log(userInfo)
+      alert('DONE')
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow

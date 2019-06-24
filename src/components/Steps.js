@@ -19,34 +19,24 @@ class Steps extends Component {
   changeColor(index) {
     switch (index) {
       case 1:
-        this.props.disable2();
-        this.props.disable3();
-        this.props.disable4();
-        this.props.disable5();
+        this.props.to1step(); this.props.disable2(); this.props.disable3(); this.props.disable4(); this.props.disable5(); 
+        // this.props.navigation.navigate('Step1Screen');
         break;
       case 2:
-        this.props.enable2();
-        this.props.disable3();
-        this.props.disable4();
-        this.props.disable5();
+        this.props.to2step(); this.props.enable2(); this.props.disable3(); this.props.disable4(); this.props.disable5();
+        // this.props.navigation.navigate('Step2Screen');
         break;
       case 3:
-        this.props.enable2();
-        this.props.enable3();
-        this.props.disable4();
-        this.props.disable5();
+        this.props.to3step(); this.props.enable2(); this.props.enable3(); this.props.disable4(); this.props.disable5();
+        // this.props.navigation.navigate('Step3Screen');
         break;
       case 4:
-        this.props.enable2();
-        this.props.enable3();
-        this.props.enable4();
-        this.props.disable5();
+        this.props.to4step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.disable5();
+        // this.props.navigation.navigate('Step4Screen');
         break;
       case 5:
-        this.props.enable2();
-        this.props.enable3();
-        this.props.enable4();
-        this.props.enable5();
+        this.props.to5step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.enable5();
+        // this.props.navigation.navigate('Step5Screen');
         break;
     }
   }
@@ -92,6 +82,7 @@ Steps.propTypes = {
   index: PropTypes.number,
 }
 const mapStateToProps = state => ({
+  currentIndex: state.currentIndex,
   step1color: state.step1color,
   step2color: state.step2color,
   step3color: state.step3color,

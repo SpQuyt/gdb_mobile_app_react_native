@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  FlatList,
   StyleSheet,
-  Image,
-  ImageBackground,
-  Modal,
-  ScrollView,
-  AsyncStorage,
 } from 'react-native';
+import PropTypes from 'prop-types';
 // import CircleStepsList from './CircleStepsList';
 import LinesList from './LinesList';
 import StepsList from './StepsList';
@@ -37,6 +28,11 @@ class Timeline extends Component {
       </View>
     )
   }
+}
+
+Timeline.propTypes = {
+  indexLine: PropTypes.array,
+  indexStep: PropTypes.array,
 }
 
 const styles = StyleSheet.create({

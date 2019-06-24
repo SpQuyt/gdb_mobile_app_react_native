@@ -1,5 +1,3 @@
-export const INCREASE = 'increase';
-export const DECREASE = 'decrease';
 export const ENABLE1 = 'enable1';
 export const DISABLE1 = 'disable1';
 export const ENABLE2 = 'enable2';
@@ -10,3 +8,10 @@ export const ENABLE4 = 'enable4';
 export const DISABLE4 = 'disable4';
 export const ENABLE5 = 'enable5';
 export const DISABLE5 = 'disable5';
+export const TO1STEP = 'to1step';
+export const TO2STEP = 'to2step';
+export const TO3STEP = 'to3step';
+export const TO4STEP = 'to4step';
+export const TO5STEP = 'to5step';
+export const TONEXTSTEP = 'tonextstep';
+export const TOBACKSTEP = 'tobackstep';
