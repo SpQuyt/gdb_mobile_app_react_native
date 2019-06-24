@@ -11,6 +11,7 @@ import Step2Screen from './src/screens/HorizontalStepsScreen/Step2Screen.js';
 import Step3Screen from './src/screens/HorizontalStepsScreen/Step3Screen.js';
 import Step4Screen from './src/screens/HorizontalStepsScreen/Step4Screen.js';
 import Step5Screen from './src/screens/HorizontalStepsScreen/Step5Screen.js';
+import PagesListNavigator from './src/components/PagesListNavigator.js'
 
 // YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 console.disableYellowBox = true;
@@ -38,10 +39,14 @@ const AppNavigator = createStackNavigator(
     LoginScreen: {
       screen: LoginScreen
     },
+    PagesListNavigator: {
+      screen: PagesListNavigator
+    }
   },
   {
     initialRouteName: 'HorizontalStepsScreen',
     // initialRouteName: 'LoginScreen',
+    // initialRouteName: 'PagesListNavigator',
     headerMode: 'none',
   }
 );

@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-
+import {withNavigation} from 'react-navigation';
 //import redux
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
@@ -17,6 +17,7 @@ class Page4 extends Component {
 
   async onBack() {
     await this.props.tobackstep();
+    global.viewPager.goToPage(this.props.currentIndex - 2);
     this.props.enable2();
     this.props.enable3();
     this.props.enable4();
@@ -87,4 +88,8 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, actions)(Page4);
+const mapStateToProps = state => ({
+  currentIndex: state.currentIndex,
+});
+
+export default connect(mapStateToProps, actions)(withNavigation(Page4));

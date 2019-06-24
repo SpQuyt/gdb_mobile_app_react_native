@@ -16,22 +16,22 @@ class Steps extends Component {
     super(props);
   }
 
-  changeColor(index) {
+  async changeColor(index) {
     switch (index) {
       case 1:
-        this.props.to1step(); this.props.disable2(); this.props.disable3(); this.props.disable4(); this.props.disable5(); 
+        await this.props.to1step(); this.props.disable2(); this.props.disable3(); this.props.disable4(); this.props.disable5(); 
         break;
       case 2:
-        this.props.to2step(); this.props.enable2(); this.props.disable3(); this.props.disable4(); this.props.disable5();
+        await this.props.to2step(); this.props.enable2(); this.props.disable3(); this.props.disable4(); this.props.disable5();
         break;
       case 3:
-        this.props.to3step(); this.props.enable2(); this.props.enable3(); this.props.disable4(); this.props.disable5();
+        await this.props.to3step(); this.props.enable2(); this.props.enable3(); this.props.disable4(); this.props.disable5();
         break;
       case 4:
-        this.props.to4step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.disable5();
+        await this.props.to4step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.disable5();
         break;
       case 5:
-        this.props.to5step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.enable5();
+        await this.props.to5step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.enable5();
         break;
     }
   }
@@ -42,7 +42,8 @@ class Steps extends Component {
         activeOpacity={1}
         style={styles.step}
         onPress={() => {
-          this.changeColor(this.props.index)
+          this.changeColor(this.props.index);
+          global.viewPager.goToPage(this.props.index-1);
         }}
       >
         <View style={[styles.circle, {

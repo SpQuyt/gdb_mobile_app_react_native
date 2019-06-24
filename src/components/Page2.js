@@ -17,6 +17,7 @@ class Page2 extends Component {
 
   async onBack() {
     await this.props.tobackstep();
+    global.viewPager.goToPage(this.props.currentIndex - 2);
     this.props.disable2();
     this.props.disable3();
     this.props.disable4();
@@ -25,6 +26,7 @@ class Page2 extends Component {
 
   async onNext() {
     await this.props.tonextstep();
+    global.viewPager.goToPage(this.props.currentIndex);
     this.props.enable2();
     this.props.enable3();
     this.props.disable4();
@@ -41,12 +43,12 @@ class Page2 extends Component {
         <View style={styles.buttonContainer}>
 
           <TouchableOpacity
-            onPress={() => {this.onBack()}}
+            onPress={() => { this.onBack() }}
             style={styles.nextButton}>
             <Text>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {this.onNext()}}
+            onPress={() => { this.onNext() }}
             style={styles.backButton}>
             <Text>Next</Text>
           </TouchableOpacity>
@@ -90,4 +92,8 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, actions)(Page2);
+const mapStateToProps = state => ({
+  currentIndex: state.currentIndex,
+});
+
+export default connect(mapStateToProps, actions)(Page2);
