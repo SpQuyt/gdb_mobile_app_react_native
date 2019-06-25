@@ -7,23 +7,10 @@ import {
   ActivityIndicator,
   Image,
   AsyncStorage,
+  StyleSheet
 } from 'react-native';
-import styles from './styles';
 //import Facebook Login
-import {LoginManager} from 'react-native-fbsdk';
-// import statusCodes along with GoogleSignin
-import { GoogleSignin, statusCodes } from 'react-native-google-signin';
-
-GoogleSignin.configure({
-  scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
-  webClientId: "690731803269-vin8ljkifio6n2gc2rdjb866b5d4v2bi.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
-  // offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-  // hostedDomain: '', // specifies a hosted domain restriction
-  // loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
-  // forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login.
-  // accountName: '', // [Android] specifies an account name on the device that should be used
-  // iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
-});
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -32,156 +19,130 @@ export default class LoginScreen extends Component {
       username: '',
       password: '',
       loading: 0,
+      userInfo: '',
     }
   }
 
-  onSaveToken = async (token, user_id) => {
-    try {
-      await AsyncStorage.setItem('myToken', token);
-      await AsyncStorage.setItem('myUserId', user_id);
-    } catch (error) {
-      // Error saving data
-    }
-  }
+  // componentDidMount() {
+  //   GoogleSignin.configure({
+  //     //It is mandatory to call this method before attempting to call signIn()
+  //     scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  //     // Repleace with your webClientId generated from Firebase console
+  //     webClientId:
+  //       '690731803269-jbi03h5j1upr03vlm7equsmo4tppg467.apps.googleusercontent.com',
+  //   });
+  // }
 
-  onLoginFB = async () => {
-    try {
-      let result = await LoginManager.logInWithPermissions(['public_profile']);
-      if (result.isCancelled) {
-        alert(`Login was cancelled!`);
-      } else {
-        alert(`Login was successful with permissions: ${result.grantedPermissions.toString()}`)
-      }
-    } catch (err) {
-      alert(`Login failed with error: ${err}`);
-    } finally {
-      console.log(result)
-    }
-  }
+  // onLoginFB = async () => {
+  //   try {
+  //     let result = await LoginManager.logInWithPermissions(['public_profile']);
+  //     if (result.isCancelled) {
+  //       alert(`Login was cancelled!`);
+  //     } else {
+  //       alert(`Login was successful with permissions: ${result.grantedPermissions.toString()}`)
+  //     }
+  //   } catch (err) {
+  //     alert(`Login failed with error: ${err}`);
+  //   } finally {
+  //     console.log(result)
+  //   }
+  // }
 
-  onLoginGG = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      this.setState({ userInfo });
-      console.log(userInfo)
-      alert('DONE')
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        alert(error.code)
-        // operation (f.e. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        alert(error.code)
-        // play services not available or outdated
-      } else {
-        alert(error.code)
-        // some other error happened
-      }
-    }
-  }
+  // onLoginGG = async () => {
+  //   //Prompts a modal to let the user sign in into your application.
+  //   try {
+  //     await GoogleSignin.hasPlayServices({
+  //       //Check if device has Google Play Services installed.
+  //       //Always resolves to true on iOS.
+  //       showPlayServicesUpdateDialog: true,
+  //     });
+  //     const userInfo = await GoogleSignin.signIn();
+  //     console.log('User Info --> ', userInfo);
+  //     this.setState({ userInfo: userInfo });
+  //   } catch (error) {
+  //     console.log('Message', error.message);
+  //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+  //       console.log('User Cancelled the Login Flow');
+  //     } else if (error.code === statusCodes.IN_PROGRESS) {
+  //       console.log('Signing In');
+  //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+  //       console.log('Play Services Not Available or Outdated');
+  //     } else {
+  //       console.log('Some Other Error Happened');
+  //     }
+  //   }
+  // }
 
-  onLogin = () => {
-    this.setState({ loading: 1 });
-    if (this.state.username == '') {
-      alert("Ô tên người dùng đang để trống!");
-      this.setState({ loading: 0 });
-    }
-    else if (this.state.password == '') {
-      alert("Ô mật khẩu đang để trống!");
-      this.setState({ loading: 0 });
-    }
-    else {
-      loginAPI(this.state.username, this.state.password)
-      // loginAPI('Aq', 'Aq')
-        .then((res) => res.json())
-        .then((resJSON) => {
-          if (resJSON.success === true) {
-            this.props.navigation.navigate('Home', {
-              user_id: resJSON.user_id,
-              user_name: this.state.username,
-            });
-            this.onSaveToken(resJSON.token,resJSON.user_id)
-          }
-          else {
-            alert("Sai mật khẩu hoặc tên người dùng!");
-          }
-          this.setState({ loading: 0 });
-        })
-        .catch(err => {
-          alert("Kiểm tra lại kết nối hoặc khởi động lại app!")
-          this.setState({ loading: 0 });
-        })
-    }
-  }
+  // _getCurrentUser = async () => {
+  //   //May be called eg. in the componentDidMount of your main component.
+  //   //This method returns the current user
+  //   //if they already signed in and null otherwise.
+  //   try {
+  //     const userInfo = await GoogleSignin.signInSilently();
+  //     this.setState({ userInfo });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  renderLoading() {
-    if (this.state.loading === 0) {
-      return (
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.onLogin}
-          >
-            <Text style={styles.text}>ĐĂNG NHẬP</Text>
-          </TouchableOpacity>
-        </View>
-      )
-    }
-    else if (this.state.loading === 1) {
-      return (
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <ActivityIndicator size="large" color="#fb3" />
-        </View>
-      )
-    }
-  }
+  // _signOut = async () => {
+  //   //Remove user session from the device.
+  //   try {
+  //     await GoogleSignin.revokeAccess();
+  //     await GoogleSignin.signOut();
+  //     this.setState({ user: null }); // Remove the user from your app's state as well
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // _revokeAccess = async () => {
+  //   //Remove your application from the user authorized applications.
+  //   try {
+  //     await GoogleSignin.revokeAccess();
+  //     console.log('deleted');
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   render() {
     return (
-      <View style={styles.screen}>
-        <View style={styles.container_img}>
-          <Image
-            style={styles.head_image}
-            source={require("../../../img/Easy-Event.png")} />
-        </View>
-
-        <View style={styles.form}>
-          <View style={styles.form_input}>
-            <TextInput
-              placeholder="Tên người dùng..."
-              onChangeText={(username) => this.setState({ username })}
-            />
-          </View>
-
-          <View style={styles.form_input}>
-            <TextInput
-              placeholder="Mật khẩu..."
-              onChangeText={(password) => this.setState({ password })}
-              secureTextEntry={true}
-            />
-          </View>
-        </View>
-
-        <View style={styles.button_container}>
-          {this.renderLoading()}
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: "transparent" }]}
-            onPress={this.onLoginFB}
-          >
-            <Text style={{color: "black",}}>Login via Facebook</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: "transparent" }]}
-            onPress={this.onLoginGG}
-          >
-            <Text style={{color: "black",}}>Login via Google</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.container}>
+        <LoginButton
+          onLoginFinished={
+            (error, result) => {
+              console.log(result);
+              if (error) {
+                console.log("login has error: " + result.error);
+              } else if (result.isCancelled) {
+                console.log("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    console.log(data.accessToken.toString())
+                    alert(result)
+                  }
+                )
+              }
+            }
+          }
+          onLogoutFinished={() => console.log("logout.")}/>
+        {/* <GoogleSigninButton
+          style={{ width: 312, height: 48 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Light}
+          onPress={this.onLoginGG}
+        /> */}
       </View>
-    )
+    );
   }
-
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

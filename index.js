@@ -20,8 +20,8 @@ const AppNavigator = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'HorizontalStepsScreen',
-    // initialRouteName: 'LoginScreen',
+    // initialRouteName: 'HorizontalStepsScreen',
+    initialRouteName: 'LoginScreen',
     headerMode: 'none',
   }
 );

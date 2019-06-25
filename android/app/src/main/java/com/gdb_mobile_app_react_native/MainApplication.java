@@ -19,8 +19,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 
-//Google Login
-import co.apptailor.googlesignin.RNGoogleSigninPackage;
+// //Google Login
+// import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
 public class MainApplication extends Application implements ReactApplication {
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
@@ -39,8 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(), 
-        new FBSDKPackage(mCallbackManager),
-        new RNGoogleSigninPackage()
+        new FBSDKPackage(mCallbackManager)
+        // new RNGoogleSigninPackage()
       );
     }
 
