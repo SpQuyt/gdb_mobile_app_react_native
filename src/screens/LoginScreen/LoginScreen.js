@@ -11,6 +11,13 @@ import {
 } from 'react-native';
 //import Facebook Login
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+// import GG Login
+import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
+
+GoogleSignin.configure({
+  scopes: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me'],
+  webClientId: '690731803269-gt8khpmlv90jkq8rdf8i8ds7744hf85s.apps.googleusercontent.com',
+});
 
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -48,30 +55,27 @@ export default class LoginScreen extends Component {
   //   }
   // }
 
-  // onLoginGG = async () => {
-  //   //Prompts a modal to let the user sign in into your application.
-  //   try {
-  //     await GoogleSignin.hasPlayServices({
-  //       //Check if device has Google Play Services installed.
-  //       //Always resolves to true on iOS.
-  //       showPlayServicesUpdateDialog: true,
-  //     });
-  //     const userInfo = await GoogleSignin.signIn();
-  //     console.log('User Info --> ', userInfo);
-  //     this.setState({ userInfo: userInfo });
-  //   } catch (error) {
-  //     console.log('Message', error.message);
-  //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-  //       console.log('User Cancelled the Login Flow');
-  //     } else if (error.code === statusCodes.IN_PROGRESS) {
-  //       console.log('Signing In');
-  //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-  //       console.log('Play Services Not Available or Outdated');
-  //     } else {
-  //       console.log('Some Other Error Happened');
-  //     }
-  //   }
-  // }
+  onLoginGG = async () => {
+    //Prompts a modal to let the user sign in into your application.
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log('User Info --> ', userInfo);
+      this.setState({ userInfo: userInfo });
+      alert(userInfo.user.name)
+    } catch (error) {
+      console.log('Message', error.message);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        alert(error.code)
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        alert(error.code)
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        alert(error.code)
+      } else {
+        alert(error)
+      }
+    }
+  }
 
   // _getCurrentUser = async () => {
   //   //May be called eg. in the componentDidMount of your main component.
@@ -127,12 +131,14 @@ export default class LoginScreen extends Component {
             }
           }
           onLogoutFinished={() => console.log("logout.")}/>
-        {/* <GoogleSigninButton
+
+        <GoogleSigninButton
           style={{ width: 312, height: 48 }}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Light}
           onPress={this.onLoginGG}
-        /> */}
+          disabled={false}
+        />
       </View>
     );
   }
