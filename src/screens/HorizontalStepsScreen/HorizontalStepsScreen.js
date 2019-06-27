@@ -24,9 +24,7 @@ class HorizontalStepsScreen extends Component {
       <View style={styles.container}>
         <Timeline indexLine={this.state.indexLine} indexStep={this.state.indexStep} />
         <PagesListNavigator currentPage={this.props.currentIndex}/>
-
       </View>
-
     )
   }
 }

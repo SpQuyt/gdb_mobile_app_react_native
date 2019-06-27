@@ -4,6 +4,7 @@ import { name as appName } from './app.json';
 import { createStackNavigator } from 'react-navigation';
 import HorizontalStepsScreen from './src/screens/HorizontalStepsScreen/HorizontalStepsScreen.js';
 import LoginScreen from './src/screens/LoginScreen/LoginScreen.js';
+import HomeScreen from './src/screens/HomeScreen/HomeScreen.js';
 import { Provider } from 'react-redux';
 import store from './src/store/store';
 
@@ -18,10 +19,14 @@ const AppNavigator = createStackNavigator(
     LoginScreen: {
       screen: LoginScreen
     },
+    HomeScreen: {
+      screen: HomeScreen
+    },
   },
   {
-    // initialRouteName: 'HorizontalStepsScreen',
-    initialRouteName: 'LoginScreen',
+    // initialRouteName: 'HomeScreen',
+    initialRouteName: 'HorizontalStepsScreen',
+    // initialRouteName: 'LoginScreen',
     headerMode: 'none',
   }
 );

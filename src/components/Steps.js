@@ -19,19 +19,19 @@ class Steps extends Component {
   async changeColor(index) {
     switch (index) {
       case 1:
-        await this.props.to1step(); this.props.disable2(); this.props.disable3(); this.props.disable4(); this.props.disable5(); 
+        await this.props.to1step(); this.props.enable1(); 
         break;
       case 2:
-        await this.props.to2step(); this.props.enable2(); this.props.disable3(); this.props.disable4(); this.props.disable5();
+        await this.props.to2step(); this.props.enable2();
         break;
       case 3:
-        await this.props.to3step(); this.props.enable2(); this.props.enable3(); this.props.disable4(); this.props.disable5();
+        await this.props.to3step(); this.props.enable3();
         break;
       case 4:
-        await this.props.to4step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.disable5();
+        await this.props.to4step(); this.props.enable4();
         break;
       case 5:
-        await this.props.to5step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.enable5();
+        await this.props.to5step(); this.props.enable5();
         break;
     }
   }
@@ -48,20 +48,20 @@ class Steps extends Component {
       >
         <View style={[styles.circle, {
           borderColor:
-            this.props.index == 1 ? this.props.step1color
-              : this.props.index == 2 ? this.props.step2color
-                : this.props.index == 3 ? this.props.step3color
-                  : this.props.index == 4 ? this.props.step4color
-                    : this.props.step5color
+            this.props.index == 1 ? this.props.stepsColor.step1
+              : this.props.index == 2 ? this.props.stepsColor.step2
+                : this.props.index == 3 ? this.props.stepsColor.step3
+                  : this.props.index == 4 ? this.props.stepsColor.step4
+                    : this.props.stepsColor.step5
         }]} />
 
         <Text style={[styles.title, {
           color:
-            this.props.index == 1 ? this.props.step1color
-              : this.props.index == 2 ? this.props.step2color
-                : this.props.index == 3 ? this.props.step3color
-                  : this.props.index == 4 ? this.props.step4color
-                    : this.props.step5color
+            this.props.index == 1 ? this.props.stepsColor.step1
+              : this.props.index == 2 ? this.props.stepsColor.step2
+                : this.props.index == 3 ? this.props.stepsColor.step3
+                  : this.props.index == 4 ? this.props.stepsColor.step4
+                    : this.props.stepsColor.step5
         }]}>
           {this.props.index == 1 ? 'Step 1.'
             : this.props.index == 2 ? 'Step 2.'
@@ -79,11 +79,7 @@ Steps.propTypes = {
 }
 const mapStateToProps = state => ({
   currentIndex: state.currentIndex,
-  step1color: state.step1color,
-  step2color: state.step2color,
-  step3color: state.step3color,
-  step4color: state.step4color,
-  step5color: state.step5color,
+  stepsColor: state.stepsColor,
 });
 
 const styles = StyleSheet.create({

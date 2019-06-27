@@ -19,10 +19,10 @@ class Lines extends Component {
       <View
         style={[styles.line, {
           borderColor:
-            this.props.index == 1 ? this.props.step2color
-              : this.props.index == 2 ? this.props.step3color
-                : this.props.index == 3 ? this.props.step4color
-                  : this.props.step5color
+            this.props.index == 1 ? this.props.stepsColor.step2
+              : this.props.index == 2 ? this.props.stepsColor.step3
+                : this.props.index == 3 ? this.props.stepsColor.step4
+                  : this.props.stepsColor.step5
         }]}
       />
     )
@@ -33,10 +33,7 @@ Lines.propTypes = {
   index: PropTypes.number,
 }
 const mapStateToProps = state => ({
-  step2color: state.step2color,
-  step3color: state.step3color,
-  step4color: state.step4color,
-  step5color: state.step5color,
+  stepsColor: state.stepsColor,
 });
 
 const styles = StyleSheet.create({

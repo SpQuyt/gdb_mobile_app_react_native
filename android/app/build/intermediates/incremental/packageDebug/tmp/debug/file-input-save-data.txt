@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jun 26 12:47:45 ICT 2019
+#Wed Jun 26 14:25:27 ICT 2019
 5.base=D\:\\GITHUB\\gdb_mobile_app_react_native\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=D\:\\GITHUB\\gdb_mobile_app_react_native\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 22.path=lib/x86_64/libfb.so
