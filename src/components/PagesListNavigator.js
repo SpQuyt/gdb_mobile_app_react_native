@@ -17,27 +17,22 @@ class PagesListNavigator extends Component {
     super(props);
   }
 
-  changeColor(index) {
+  async changeColor(index) {
     switch (index) {
       case 1:
-        this.props.to1step(); this.props.disable2(); this.props.disable3(); this.props.disable4(); this.props.disable5();
-        // this.props.navigation.navigate('Step1Screen');
+        await this.props.to1step(); this.props.enable1();
         break;
       case 2:
-        this.props.to2step(); this.props.enable2(); this.props.disable3(); this.props.disable4(); this.props.disable5();
-        // this.props.navigation.navigate('Step2Screen');
+        await this.props.to2step(); this.props.enable2();
         break;
       case 3:
-        this.props.to3step(); this.props.enable2(); this.props.enable3(); this.props.disable4(); this.props.disable5();
-        // this.props.navigation.navigate('Step3Screen');
+        await this.props.to3step(); this.props.enable3();
         break;
       case 4:
-        this.props.to4step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.disable5();
-        // this.props.navigation.navigate('Step4Screen');
+        await this.props.to4step(); this.props.enable4();
         break;
       case 5:
-        this.props.to5step(); this.props.enable2(); this.props.enable3(); this.props.enable4(); this.props.enable5();
-        // this.props.navigation.navigate('Step5Screen');
+        await this.props.to5step(); this.props.enable5();
         break;
     }
   }
@@ -45,7 +40,7 @@ class PagesListNavigator extends Component {
   render() {
     return (
       <ViewPager
-        ref={(viewPager) => { 
+        ref={(viewPager) => {
           global.viewPager = viewPager;
         }}
         initialPage={this.props.currentIndex - 1}
@@ -53,21 +48,11 @@ class PagesListNavigator extends Component {
           this.changeColor(page + 1);
         }}
       >
-        {/* <View>
-          <TouchableOpacity onPress={async () => {
-            await this.props.to3step();
-            console.log(this.props.currentIndex)
-            this.viewPager.goToPage(this.props.currentIndex)
-          }}>
-            <Text>GO</Text>
-          </TouchableOpacity>
-        </View> */}
         <Page1 />
         <Page2 />
         <Page3 />
         <Page4 />
         <Page5 />
-
       </ViewPager>
     )
   }
