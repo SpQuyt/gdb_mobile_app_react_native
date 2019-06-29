@@ -7,9 +7,9 @@
 ### Install:
   * Clone this repo.
   * In **`index.js `**, change the `initialRouteName` value (line 23) to **LoginScreen**.
-  * Open terminal or Cmd and run this code
+  * Open Terminal or Cmd and run this code
   ```bash
-    cd android && gradlew clean && cd .. && react-native run-android
+    chmod 777 android && react-native run-android
   ```
 ## Task 2 (15929): Implement a horizontal steps screen
 ### Overview:
@@ -23,5 +23,5 @@
   * In **`index.js `**, change the `initialRouteName` value (line 23) to **HorizontalStepsScreen**.
   * Open terminal or Cmd and run this code
   ```bash
-    cd android && gradlew clean && cd .. && react-native run-android
+    chmod 777 android && react-native run-android
   ```
