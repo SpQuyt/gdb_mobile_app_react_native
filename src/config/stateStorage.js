@@ -10,4 +10,11 @@ export default class stateStorage {
   static SCREEN_WIDTH = Dimensions.get('screen').width;
   static SCREEN_HEIGHT = Dimensions.get('screen').height;
   static fontsize = 15;
+  static user = {
+    id: '',
+    name: '',
+    email: '',
+    avatar: '',
+    accessToken: '',
+  }
 }

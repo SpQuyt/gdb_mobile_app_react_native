@@ -4,18 +4,33 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 //import Facebook Login
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import { AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
+import stateStorage from '../config/stateStorage';
 
-export default class LoginFacebookButton extends Component {
+
+class LoginFacebookButton extends Component {
   onLoginFB = async () => {
     try {
-      let result = await LoginManager.logInWithPermissions(['public_profile']);
-      if (result.isCancelled) {
+      let resultLogin = await LoginManager.logInWithPermissions(['public_profile']);
+
+      if (resultLogin.isCancelled) {
         alert(`Login was cancelled!`);
       } else {
-        alert(`Login was successful with permissions: ${result.grantedPermissions.toString()}`)
+        let resultToken = await AccessToken.getCurrentAccessToken();
+
+        let res = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture.type(large)&access_token=${resultToken.accessToken}`)
+        let resultUserInfoJSON = await res.json();
+
+        stateStorage.user.id = resultUserInfoJSON.id;
+        stateStorage.user.name = resultUserInfoJSON.name;
+        stateStorage.user.email = resultUserInfoJSON.email;
+        stateStorage.user.avatar = resultUserInfoJSON.picture.data.url;
+        stateStorage.user.accessToken = resultToken.accessToken;
+
+        this.props.navigation.navigate('ProfileScreen');
       }
     } catch (err) {
       alert(`Login failed with error: ${err}`);
@@ -46,10 +61,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10,
-    marginTop: 20,
   },
   fbIcon: {
     height: 43,
     width: 43,
   },
 })
+
+export default withNavigation(LoginFacebookButton);
