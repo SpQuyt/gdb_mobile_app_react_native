@@ -2,7 +2,7 @@ import { AppRegistry, YellowBox } from 'react-native';
 import React, { Component } from 'react';
 import { name as appName } from './app.json';
 import { createStackNavigator } from 'react-navigation';
-import HorizontalStepsScreen from './src/screens/HorizontalSteps/HorizontalStepsScreen';
+import OnboardingScreen from './src/screens/Onboarding/OnboardingScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
@@ -16,8 +16,8 @@ console.disableYellowBox = true;
 
 const AppNavigator = createStackNavigator(
   {
-    HorizontalStepsScreen: {
-      screen: HorizontalStepsScreen
+    OnboardingScreen: {
+      screen: OnboardingScreen
     },
     LoginScreen: {
       screen: LoginScreen
@@ -37,11 +37,11 @@ const AppNavigator = createStackNavigator(
   },
   {
     // initialRouteName: 'RegisterScreen',
-    // initialRouteName: 'HorizontalStepsScreen',
+    initialRouteName: 'OnboardingScreen',
     // initialRouteName: 'LoginScreen',
     // initialRouteName: 'ProfileScreen',
     // initialRouteName: 'ForgotPasswordScreen',
-    initialRouteName: 'VerifyMobileScreen',
+    // initialRouteName: 'VerifyMobileScreen',
     headerMode: 'none',
   }
 );

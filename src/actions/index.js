@@ -1,6 +1,6 @@
 import {
   ENABLE1, ENABLE2, ENABLE3, ENABLE4, ENABLE5,
-  TO1STEP, TO2STEP, TO3STEP, TO4STEP, TO5STEP, TOBACKSTEP, TONEXTSTEP,
+  TO1STEP, TO2STEP, TOBACKSTEP, TONEXTSTEP,
   FOCUSEMAIL, FOCUSPASSWORD, FOCUSMOBILE, FOCUSNAME,
   NOTFOCUSEMAIL, NOTFOCUSPASSWORD, NOTFOCUSMOBILE, NOTFOCUSNAME,
 } from './type';
@@ -12,9 +12,6 @@ export const enable5 = () => ({ type: ENABLE5 });
 
 export const to1step = () => ({ type: TO1STEP });
 export const to2step = () => ({ type: TO2STEP });
-export const to3step = () => ({ type: TO3STEP });
-export const to4step = () => ({ type: TO4STEP });
-export const to5step = () => ({ type: TO5STEP });
 export const tonextstep = () => ({ type: TONEXTSTEP });
 export const tobackstep = () => ({ type: TOBACKSTEP });
 
