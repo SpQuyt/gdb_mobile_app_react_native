@@ -9,16 +9,20 @@ import {
 } from 'react-native';
 import stateStorage from '../../config/stateStorage';
 import InputEmail from '../../components/InputEmail';
-import ResetPasswordButton from './ResetPasswordButton';
 import ForgotIconsContainer from './ForgotIconsContainer';
 import BackXButton from '../../components/BackXButton';
+import ColoredButton from '../../components/ColoredButton';
 
 export default class ForgotPasswordScreen extends Component {
+  onReset = async () => {
+
+  }
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <BackXButton/>
+          <BackXButton />
           <View style={styles.textContainer}>
             <Text style={[styles.text, { fontSize: 25, color: 'black' }]}>Forgot your password?</Text>
             <Text style={styles.text}>Enter your email below to receive your password reset instructions.</Text>
@@ -26,7 +30,11 @@ export default class ForgotPasswordScreen extends Component {
 
           <View style={styles.body}>
             <InputEmail />
-            <ResetPasswordButton />
+
+            <View style={styles.buttonContainer} >
+              <ColoredButton title='Reset Password' method={this.onReset} />
+            </View>
+
             <ForgotIconsContainer />
           </View>
         </View>
@@ -44,6 +52,11 @@ const styles = StyleSheet.create({
     height: stateStorage.SCREEN_HEIGHT * 0.3,
     justifyContent: 'center',
     padding: 10,
+  },
+  buttonContainer: {
+    height: stateStorage.SCREEN_HEIGHT * 0.1,
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
   text: {
     fontSize: stateStorage.fontsize,

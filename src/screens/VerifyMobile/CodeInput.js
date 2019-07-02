@@ -17,7 +17,6 @@ export default class CodeInput extends Component {
         <TextInput
           maxLength={1}
           style={styles.cell}
-          autoFocus={true}
         />
         <TextInput
           maxLength={1}

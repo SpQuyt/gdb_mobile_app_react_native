@@ -13,6 +13,7 @@ import * as actions from '../../actions/index';
 import stateStorage from '../../config/stateStorage';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ColoredButton from '../../components/ColoredButton';
 
 class ButtonContainer extends Component {
   constructor(props) {
@@ -40,9 +41,8 @@ class ButtonContainer extends Component {
         </View>
         :
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.onNext} style={styles.button1}>
-            <Text style={styles.text1}>Next</Text>
-          </TouchableOpacity>
+          <ColoredButton title='Next' method={this.onNext} />
+
           <TouchableOpacity onPress={this.onSkip} style={styles.button2}>
             <Text style={styles.text2}>Skip</Text>
           </TouchableOpacity>

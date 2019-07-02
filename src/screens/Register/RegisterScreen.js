@@ -3,16 +3,21 @@ import {
   StyleSheet,
   ScrollView,
   Keyboard,
+  View,
   TouchableWithoutFeedback,
 } from 'react-native';
 import stateStorage from '../../config/stateStorage';
 import RegisterIconsContainer from './RegisterIconsContainer';
 import RegisterInputFormsContainer from './RegisterInputFormsContainer';
 import GoToLoginButton from './GoToLoginButton';
-import SignupButton from './SignupButton';
 import BackXButton from '../../components/BackXButton';
+import ColoredButton from '../../components/ColoredButton';
 
 export default class RegisterScreen extends Component {
+  onSignup = async () => {
+
+  }
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -22,7 +27,9 @@ export default class RegisterScreen extends Component {
 
           <RegisterInputFormsContainer />
 
-          <SignupButton />
+          <View style={styles.buttonContainer} >
+            <ColoredButton title='Sign Up' method={this.onSignup} />
+          </View>
           <GoToLoginButton />
         </ScrollView>
       </TouchableWithoutFeedback>
@@ -34,5 +41,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: stateStorage.backgroundColor,
+  },
+  buttonContainer: {
+    height: stateStorage.SCREEN_HEIGHT * 0.1,
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
 })                                                                

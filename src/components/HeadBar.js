@@ -4,10 +4,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
@@ -17,6 +13,7 @@ import Foundation from 'react-native-vector-icons/Foundation';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import stateStorage from '../config/stateStorage';
+import BackXButton from './BackXButton';
 
 class HeadBar extends Component {
   onBack = () => {
@@ -31,11 +28,7 @@ class HeadBar extends Component {
     return (
       <View style={styles.headBarContainer}>
         <View style={styles.leftIcons}>
-          {Platform.OS == 'ios'
-            ? <TouchableOpacity onPress={this.onBack} style={styles.icon}>
-              <Ionicons name="ios-arrow-back" size={20} />
-            </TouchableOpacity>
-            : <View />}
+          <BackXButton />
 
           <TouchableOpacity onPress={this.onNavigationList} style={styles.icon}>
             <Foundation name="list" size={20} />

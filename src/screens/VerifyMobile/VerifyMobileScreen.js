@@ -9,12 +9,16 @@ import {
 } from 'react-native';
 import stateStorage from '../../config/stateStorage';
 import BackXButton from '../../components/BackXButton';
-import ConfirmButton from './ConfirmButton';
 // import CodeInput from './CodeInput';
 import CodeInput from 'react-native-confirmation-code-input';
+import ColoredButton from '../../components/ColoredButton';
 
 export default class VerifyMobileScreen extends Component {
   onReset = async () => {
+
+  }
+
+  onConfirm = async () => {
 
   }
 
@@ -42,7 +46,10 @@ export default class VerifyMobileScreen extends Component {
           </View>
 
           <View style={styles.body}>
-            <ConfirmButton />
+            <View style={styles.buttonContainer} >
+              <ColoredButton title='Confirm' method={this.onConfirm}/>
+            </View>
+
             <Text />
             <Text style={[styles.text, { alignSelf: 'center' }]}>I didn't receive a code!</Text>
             <TouchableOpacity style={{ alignSelf: 'center' }} onPress={this.onReset} >
@@ -70,6 +77,11 @@ const styles = StyleSheet.create({
     fontSize: stateStorage.fontsize,
     color: 'grey',
     marginVertical: 6,
+  },
+  buttonContainer: {
+    height: stateStorage.SCREEN_HEIGHT * 0.1,
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
   body: {
     height: stateStorage.SCREEN_HEIGHT * 0.5,
